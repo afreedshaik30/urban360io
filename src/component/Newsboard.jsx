@@ -11,20 +11,14 @@ const Newsboard = ({ category }) => {
       setLoading(true);
       setError(null);
 
-      const apiKey = "03157df20f5d45eabd8f184a7e36fd90";
-
-      if (!apiKey) {
-        setError("Missing API key. Check your environment variables.");
-        setLoading(false);
-        return;
-      }
-
-      let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
-      if (category && category !== "home") {
-        url += `&category=${category}`;
-      }
-
       try {
+        // Build the backend proxy URL
+        //  let url = `http://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+        let url = "https://urban360-backend.onrender.com/api/news";
+        if (category && category !== "home") {
+          url += `?category=${category}`;
+        }
+
         const response = await fetch(url);
         if (!response.ok) throw new Error("Failed to fetch news");
 
@@ -51,20 +45,20 @@ const Newsboard = ({ category }) => {
         <div
           className="d-flex justify-content-center align-items-center"
           style={{
-            position: "fixed", // Use fixed so it stays centered even if the page scrolls
+            position: "fixed",
             top: 0,
             left: 0,
-            width: "100vw", // Viewport width
-            height: "100vh", // Viewport height
+            width: "100vw",
+            height: "100vh",
             backgroundColor: "rgba(34, 32, 32, 0.8)",
-            zIndex: 9999, // Very high to ensure it’s above everything
+            zIndex: 9999,
           }}
         >
           <div
             className="spinner-border"
             style={{
-              width: "8rem", // Larger spinner size
-              height: "8rem", // Larger spinner size
+              width: "8rem",
+              height: "8rem",
               color: "yellow",
               borderWidth: "1.0em",
             }}
