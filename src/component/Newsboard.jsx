@@ -19,7 +19,7 @@ const Newsboard = ({ category }) => {
         return;
       }
 
-      let url = `http://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
       if (category && category !== "home") {
         url += `&category=${category}`;
       }
